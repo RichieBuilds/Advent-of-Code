@@ -1,16 +1,13 @@
-def solution() -> int | None:
+def solution() -> int:
     with open("input.txt", "r") as f:
         f_contents = f.read()
 
     floor = 0
-    
-    for i in range(len(f_contents)):
-        if f_contents[i] == "(":
-            floor += 1
-        elif f_contents[i] == ")":
-            floor -= 1
-        if floor < 0:
-            # Remember loop starts counting at 0. So we just add 1 to get the natural position of the number
-            return i + 1     
+    pos = 0 # Pos is one indexed, so if zero, then floor was never < 0
 
+    while not floor < 0:
+        floor += 1 if f_contents[pos] == "(" else -1
+        pos += 1
+    return pos
+    
 print(solution()) # Prints 1771 
